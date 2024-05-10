@@ -6,6 +6,8 @@ import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @RequiredArgsConstructor
 public class MemberController {
     private final MemberService memberService;
+
 
     @Getter
     @Setter
@@ -45,5 +48,13 @@ public class MemberController {
         return "redirect:/";
     }
 
+    @GetMapping("/login")
+    public String login(MemberForm memberForm) {
+        return "login_form";
+    }
 
+    @GetMapping("/logout")
+    public String logout(MemberForm memberForm) {
+        return "redirect:/";
+    }
 }
