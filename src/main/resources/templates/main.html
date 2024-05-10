@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" layout:decorate="~{layout}">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -7,7 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-<div class="bg-yellow-400"
+<div layout:fragment="content" class="bg-yellow-400"
      th:with="notebookList=${mainDataDto.notebookList},
         noteList=${mainDataDto.noteList},
         targetNotebook=${mainDataDto.targetNotebook},
@@ -53,6 +53,8 @@
             </form>
             <!-- You can open the modal using ID.showModal() method -->
             <button class="btn" onclick="my_modal_3.showModal()">이름 변경</button>
+            <a href="/signup">회원가입</a>
+
             <dialog id="my_modal_3" class="modal">
                 <div class="modal-box flex flex-col items-center">
                     <form method="dialog">
