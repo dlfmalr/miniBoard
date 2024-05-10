@@ -51,6 +51,20 @@
             <form th:action="@{|/books/${targetNotebook.id}/delete|}" method="post">
                 <input type="submit" value="삭제">
             </form>
+            <!-- You can open the modal using ID.showModal() method -->
+            <button class="btn" onclick="my_modal_3.showModal()">이름 변경</button>
+            <dialog id="my_modal_3" class="modal">
+                <div class="modal-box flex flex-col items-center">
+                    <form method="dialog">
+                        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                    </form>
+                    <form th:action="@{|/books/${targetNotebook.id}/update|}" class="flex" method="post">
+                        <input type="hidden" name="targetNoteId" th:value="${targetNote.id}">
+                        <input type="text" name="name" class="border-2" th:value="${targetNotebook.name}">
+                        <input type="submit" class="btn" value="수정">
+                    </form>
+                </div>
+            </dialog>
         </div>
         <div class="bg-sky-100 w-[20%] h-[800px] text-center ">
             <ul class="h-[100%] overflow-scroll">

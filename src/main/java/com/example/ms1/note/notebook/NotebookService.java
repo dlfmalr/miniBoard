@@ -25,4 +25,10 @@ public class NotebookService {
     public void delete(Notebook notebook) {
         notebookRepository.delete(notebook);
     }
+
+    public Notebook updateName(Long id, String name) {
+        Notebook notebook = getNotebook(id);
+        notebook.setName(name);
+        return notebookRepository.save(notebook);
+    }
 }
