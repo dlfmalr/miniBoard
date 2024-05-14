@@ -55,6 +55,7 @@
         targetNote=${mainDataDto.targetNote},
         searchedNotebookList=${mainDataDto.searchedNotebookList},
         searchedNoteList=${mainDataDto.searchedNoteList}">
+    <input type="hidden" id="isSearchModal" th:value="${isSearchModal}">
     <div class="bg-blue-300">
         <a href="/">logo</a>
     </div>
@@ -112,22 +113,25 @@
 
             <button class="btn" onclick="searchModal.showModal()">검색</button>
             <dialog id="searchModal" class="modal">
-                <div class="modal-box">
-                   <div>
-                       <form action="/">
-                           <input type="text" name="keyword" class="input">
+                <div class="modal-box h-[550px]">
+                   <div class="h-[15%]">
+                       <form action="/" class="flex justify-center gap-5">
+                           <input type="text" name="keyword" class="input input-border">
+                           <input type="hidden" name="isSearchModal" value="true">
                            <input type="submit" value="검색" class="btn">
                        </form>
                    </div>
-                    <ul>
-                        <li th:each="notebook : ${searchedNotebookList}">
-                            <a href="#" th:text="${notebook.name}"></a>
+                    <ul class="h-[70%] border-2 overflow-auto" th:with="itemHover='hover:bg-blue-300 hover:text-white p-[10px] flex', itemAnchorClass='inline-block w-[100%]'">
+                        <li th:each="notebook : ${searchedNotebookList}" th:class="${itemHover}">
+                            <i class="fa-solid fa-book p-[5px]"></i>
+                            <a href="#" th:text="${notebook.name}" th:class="${itemAnchorClass}"></a>
                         </li>
-                        <li th:each="note : ${searchedNoteList}">
-                            <a href="#" th:text="${note.title}"></a>
+                        <li th:each="note : ${searchedNoteList}" th:class="${itemHover}">
+                            <i class="fa-solid fa-note-sticky p-[5px]"></i>
+                            <a href="#" th:text="${note.title}" th:class="${itemAnchorClass}"></a>
                         </li>
                     </ul>
-                    <div class="modal-action">
+                    <div class="modal-action h-[15%]">
                         <form method="dialog">
                             <button class="btn">Close</button>
                         </form>
@@ -180,6 +184,12 @@
           });
 
         editor.getMarkdown();
+    </script>
+    <script>
+        const isSearchModal = document.querySelector("#isSearchModal").value;
+        if(JSON.parse(isSearchModal)) {
+            searchModal.showModal();
+        }
     </script>
     <script>
         function updateForm() {
