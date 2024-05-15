@@ -12,11 +12,9 @@ public class MainController {
     private final MainService mainService;
 
     @RequestMapping("/")
-    public String main(Model model, @RequestParam(defaultValue = "") String keyword, String isSearchModal) {
-        MainDataDto mainDataDto = mainService.getDefaultMainData(keyword);
+    public String main(Model model, ParamHandler paramHandler) {
+        MainDataDto mainDataDto = mainService.getDefaultMainData(paramHandler.getKeyword());
         model.addAttribute("mainDataDto", mainDataDto);
-        model.addAttribute("isSearchModal", isSearchModal);
-
         return "main";
     }
 }
